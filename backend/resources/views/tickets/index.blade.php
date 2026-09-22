@@ -6,7 +6,11 @@
 </head>
 <body>
     <h1>Daftar Tiket</h1>
-    
+
+    @include('tickets._messages')
+
+    <a href="{{ route('tickets.create') }}">Buat Tiket</a>
+
     <table border="1" cellpadding="8">
         <thead>
             <tr>
@@ -15,6 +19,7 @@
                 <th>Kategori</th>
                 <th>Pemilik</th>
                 <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +30,14 @@
                     <td>{{ $ticket->category->name }}</td>
                     <td>{{ $ticket->user->name }}</td>
                     <td>{{ $ticket->status }}</td>
+                    <td>
+                        <a href="{{ route('tickets.show', $ticket) }}">Detail</a>
+                        <a href="{{ route('tickets.edit', $ticket) }}">Edit</a>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">Belum ada tiket.</td>
+                    <td colspan="6">Belum ada tiket.</td>
                 </tr>
             @endforelse
         </tbody>
